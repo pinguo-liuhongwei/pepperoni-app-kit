@@ -1,4 +1,4 @@
-target 'PepperoniAppTemplate' do
+target 'test01' do
 	pod 'Lock', '~> 1.24'
 	pod 'Lock/TouchID'
 	pod 'Lock/SMS'

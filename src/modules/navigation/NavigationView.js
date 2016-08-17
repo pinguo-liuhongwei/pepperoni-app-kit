@@ -14,9 +14,9 @@ import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
 // Height duplicated from React Native NavigationHeader component
-const APP_BAR_HEIGHT = Platform.OS === 'ios' ? 64 : 56;
+const APP_BAR_HEIGHT = 0;//Platform.OS === 'ios' ? 64 : 56;
 // Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 50;
+const TAB_BAR_HEIGHT = 0;//50;
 
 const NavigationView = React.createClass({
   propTypes: {
@@ -60,6 +60,18 @@ const NavigationView = React.createClass({
     const {tabs} = this.props.navigationState;
     const tabKey = tabs.routes[tabs.index].key;
     const scenes = this.props.navigationState[tabKey];
+    
+    return (
+      <View style={styles.container}>
+        <NavigationCardStack
+          key={'stack_' + tabKey}
+          onNavigateBack={this.props.onNavigateBack}
+          navigationState={scenes}
+          renderScene={this.renderScene}
+        />
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <NavigationCardStack

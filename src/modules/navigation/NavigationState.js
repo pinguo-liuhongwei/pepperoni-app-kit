@@ -34,13 +34,18 @@ const initialState = fromJS({
     index: 0,
     routes: [
       {key: 'HomeTab', title: 'HOME'},
+      {key: 'EditTab', title: 'EDIT'},
       {key: 'ProfileTab', title: 'PROFILE'}
     ]
   },
   // Scenes for the `HomeTab` tab.
   HomeTab: {
     index: 0,
-    routes: [{key: 'Counter', title: 'Counter Screen'}]
+    routes: [{key: 'Home', title: 'Home Screen'}]
+  },// Scenes for the `HomeTab` tab.
+  EditTab: {
+    index: 0,
+    routes: [{key: 'Edit', title: 'Edit Screen'}]
   },
   // Scenes for the `ProfileTab` tab.
   ProfileTab: {
