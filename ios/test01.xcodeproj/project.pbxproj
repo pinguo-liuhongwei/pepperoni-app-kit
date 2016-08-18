@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1916AD410B0B45C9BEDB553E /* libA0RNLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBED167597174594A47B20BE /* libA0RNLock.a */; };
+		5AC0DE3E1D6592EE0076B889 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC0DE3D1D6592EE0076B889 /* libRNImagePicker.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C7892EC5B6C191C5E6B2FFC1 /* libPods-test01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0F92B97868984683857760 /* libPods-test01.a */; };
 /* End PBXBuildFile section */
@@ -137,6 +138,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2A0F92B97868984683857760 /* libPods-test01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2990456DA7C38AB444D028 /* Pods-test01.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test01.debug.xcconfig"; path = "Pods/Target Support Files/Pods-test01/Pods-test01.debug.xcconfig"; sourceTree = "<group>"; };
+		5AC0DE301D658F9E0076B889 /* libRNImagePicker.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRNImagePicker.a; path = "../../../../../Library/Developer/Xcode/DerivedData/RNImagePicker-ecjqbwsnnxjhcbebwdwdxjbctegc/Build/Products/Debug-iphonesimulator/libRNImagePicker.a"; sourceTree = "<group>"; };
+		5AC0DE3D1D6592EE0076B889 /* libRNImagePicker.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRNImagePicker.a; path = "../node_modules/react-native-image-picker/ios/build/Debug-iphoneos/libRNImagePicker.a"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8E3B2937F3EB6D0910A7001B /* Pods-test01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test01.release.xcconfig"; path = "Pods/Target Support Files/Pods-test01/Pods-test01.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AC0DE3E1D6592EE0076B889 /* libRNImagePicker.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -272,6 +276,8 @@
 		15F686EF85271E73E222965E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5AC0DE3D1D6592EE0076B889 /* libRNImagePicker.a */,
+				5AC0DE301D658F9E0076B889 /* libRNImagePicker.a */,
 				2A0F92B97868984683857760 /* libPods-test01.a */,
 			);
 			name = Frameworks;

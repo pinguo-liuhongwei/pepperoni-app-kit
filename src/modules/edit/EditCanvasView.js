@@ -9,22 +9,29 @@ import {
 } from 'react-native';
 
 const EditCanvasView = React.createClass({
+
 	render() {
 
-    return (<View style={styles.main}>
-        <Text>EditCanvasView</Text>
+    console.log('Edit Canvas view', this.props.photo);
 
+    return (<View style={styles.main}>
+        <Image style={styles.img} source={this.props.photo} />
     	</View>
     )}
+
 });
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor:0xff000010,
+    backgroundColor:0x808080ff,
     flex: 1,
     flexDirection:'column',
     alignItems:'stretch',
   },
+  img:{
+    flex:1,
+    resizeMode:'contain',
+  }
 });
 
 export default EditCanvasView;

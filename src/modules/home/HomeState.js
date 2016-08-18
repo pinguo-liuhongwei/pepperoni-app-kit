@@ -4,28 +4,17 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 
 // Initial state
 const initialState = Map({
-  value: 0,
-  loading: false
+  photo:null,
 });
 
 // Actions
-const INCREMENT = 'HomeState/INCREMENT';
-const RESET = 'HomeState/RESET';
-const RANDOM_REQUEST = 'HomeState/RANDOM_REQUEST';
+const PHOTO_SELECTED = 'HomeState/PHOTO_SELECTED';
 const RANDOM_RESPONSE = 'HomeState/RANDOM_RESPONSE';
 
-// Action creators
-export function increment() {
-  return {type: INCREMENT};
-}
-
-export function reset() {
-  return {type: RESET};
-}
-
-export function random() {
+export function photoSelected(photo) {
   return {
-    type: RANDOM_REQUEST
+    type: PHOTO_SELECTED,
+    payload:photo,
   };
 }
 
@@ -39,17 +28,8 @@ export async function requestRandomNumber() {
 // Reducer
 export default function HomeStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case INCREMENT:
-      return state.update('value', value => value + 1);
-
-    case RESET:
-      return initialState;
-
-    case RANDOM_REQUEST:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(requestRandomNumber)
-      );
+    case PHOTO_SELECTED:
+      return state.set('photo', action.payload);
 
     case RANDOM_RESPONSE:
       return state

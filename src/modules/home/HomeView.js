@@ -1,5 +1,4 @@
 import * as HomeState from './HomeState';
-import * as NavigationState from '../../modules/navigation/NavigationState';
 import pxToDp from '../../utils/pxToDp';
 import React, {PropTypes} from 'react';
 import {
@@ -9,6 +8,8 @@ import {
   Text,
   View
 } from 'react-native';
+var Platform = require('react-native').Platform;
+var ImagePicker = require('react-native-image-picker');
 
 
 const HomeView = React.createClass({
@@ -19,11 +20,23 @@ const HomeView = React.createClass({
   gotoCamera() {
     console.log('gotoCamera');
     //this.props.switchTab(this.states.tabs);
+    // Launch Camera:
+    const options={};
+    ImagePicker.launchCamera(options, (response)  => {
+      // Same code as in above section!
+    });
   },
+
   gotoAlbum() {
     console.log('gotoAlbum',this.props.tabEdit);
-    //this.props.switchTab(this.props.tabEdit.get(1));
-    this.props.switchTab(this.props.tabs.getIn('routes',1));
+    // Open Image Library:
+    const options={};
+    ImagePicker.launchImageLibrary(options, (response)  => {
+      // Same code as in above section!
+      console.log('a photo has been selected',response);
+      this.props.photoSelected(HomeState.photoSelected(response));
+      this.props.switchTab(1);
+    });
   },
 
   render() {

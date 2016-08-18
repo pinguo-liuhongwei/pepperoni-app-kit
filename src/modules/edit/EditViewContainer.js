@@ -5,8 +5,7 @@ import { switchTab, RouteIndex} from '../navigation/NavigationState';
 
 export default connect(
   state => ({
-    edit: state.getIn(['edit', 'value']),
-    loading: state.getIn(['edit', 'loading']),
+    photo: state.getIn(['home', 'photo']),
     tabs:state.getIn(['navigationState','tabs'])
   }),
   dispatch => ({
