@@ -9,14 +9,35 @@ import {
 } from 'react-native';
 
 const EditHeaderView = React.createClass({
-	render() {
+
+  propTypes: {
+    goBack: PropTypes.func.isRequired,
+    goNext: PropTypes.func.isRequired,
+  },
+
+  goBack() {
+  	console.log('EditHeaderView', 'goBack');
+    this.props.goBack();
+  },
+  goNext() {
+  	console.log('EditHeaderView', 'goNext');
+    this.props.goNext();
+  },
+  gotoResult() {
+    this.props.switchTab(this.props.tabs.getIn('routes',1));
+  },
+
+  render() {
 
     return (<View style={styles.main}>
-
-    	 <Image style={styles.leftBtn} source={require('../../imgs/page-edit/fanhui-@2x.png')}/>
+		<TouchableOpacity style={styles.leftBtn} onPress={this.goBack}>
+		   	<Image source={require('../../imgs/page-edit/fanhui-@2x.png')}/>
+		</TouchableOpacity>
         <Text style={styles.title} >EditHeaderView</Text>
-         <Image style={styles.rightBtn} source={require('../../imgs/page-edit/jinru@2x.png')}/>
-    	</View>
+        <TouchableOpacity style={styles.rightBtn} onPress={this.goNext}>
+		   	<Image source={require('../../imgs/page-edit/jinru@2x.png')}/>
+		</TouchableOpacity>
+    </View>
     )}
 });
 

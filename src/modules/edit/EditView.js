@@ -19,10 +19,11 @@ const EditView = React.createClass({
     switchTab: PropTypes.func.isRequired
   },
   gotoCamera() {
-    console.log('gotoCamera');
+    console.log('EditView', 'gotoCamera');
   },
   gotoAlbum() {
-    console.log('gotoAlbum');
+    console.log('EditView', 'gotoAlbum',this.props.tabs.getIn('routes',0));
+    this.props.switchTab(0);
   },
   random() {
     this.props.dispatch(EditState.random());
@@ -30,7 +31,7 @@ const EditView = React.createClass({
 
   render() {
     return (<View style={styles.main}>
-<EditHeaderView style={styles.header} />
+<EditHeaderView style={styles.header} goBack={this.gotoAlbum} goNext={this.gotoAlbum} />
 <EditCanvasView style={styles.canvas} />
 <EditFilterBarView style={styles.filterBar} />
 <EditSliderBarView style={styles.sliderBar} />

@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     paddingBottom:pxToDp(96),
   },
   canvas:{
-    paddingLeft:pxToDp(84),
-    paddingRight:pxToDp(96),
+    paddingLeft:pxToDp(30),
+    paddingRight:pxToDp(30),
     flexDirection:'row',
     backgroundColor:0xffff0010,
     flex:1,

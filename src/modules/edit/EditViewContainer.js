@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import EditView from './EditView';
-import {pushRoute, popRoute, switchTab, navigationCompleted} from '../navigation/NavigationState';
+import { switchTab, RouteIndex} from '../navigation/NavigationState';
 
 
 export default connect(
@@ -13,14 +13,5 @@ export default connect(
     switchTab(index) {
       dispatch(switchTab(index));
     },
-    pushRoute(index) {
-      dispatch(pushRoute(index));
-    },
-    onNavigateBack() {
-      dispatch(popRoute());
-    },
-    onNavigateCompleted() {
-      dispatch(navigationCompleted());
-    }
   })
 )(EditView);

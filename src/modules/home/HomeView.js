@@ -14,13 +14,15 @@ import {
 const HomeView = React.createClass({
   propTypes: {
     switchTab: PropTypes.func.isRequired,
+    //tabEdit:PropTypes.String.isRequired,
   },
   gotoCamera() {
     console.log('gotoCamera');
     //this.props.switchTab(this.states.tabs);
   },
   gotoAlbum() {
-    //console.log('gotoAlbum',this.props.tabs);
+    console.log('gotoAlbum',this.props.tabEdit);
+    //this.props.switchTab(this.props.tabEdit.get(1));
     this.props.switchTab(this.props.tabs.getIn('routes',1));
   },
 

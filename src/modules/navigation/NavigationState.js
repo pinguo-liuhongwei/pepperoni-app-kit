@@ -28,6 +28,13 @@ export function popRoute() {
   return {type: POP_ROUTE};
 }
 
+export function RouteIndex(){
+  return {
+    HomeTab:0,
+    EditTab:1,
+  }
+}
+
 // reducers for tabs and scenes are separate
 const initialState = fromJS({
   tabs: {
