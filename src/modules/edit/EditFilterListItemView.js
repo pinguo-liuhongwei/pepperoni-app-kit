@@ -9,13 +9,20 @@ import {
   Text,
   View
 } from 'react-native';
-
-
+import * as Animatable from 'react-native-animatable';
 
 const EditFilterListItemView = React.createClass({
   propTypes:{
-    filterData:PropTypes.object.isRequired,
-    rowID:PropTypes.string.isRequired
+    filterData:React.PropTypes.shape({
+      style: React.PropTypes.string,
+      image: React.PropTypes.string,
+      title: React.PropTypes.string,
+      isFree: React.PropTypes.number,
+      isLock: React.PropTypes.number,
+      isNew: React.PropTypes.number,
+      price: React.PropTypes.number,
+    }),
+    rowID:PropTypes.string.isRequired,
   },
 
   getInitialState() {
@@ -46,8 +53,8 @@ const EditFilterListItemView = React.createClass({
   },
 
   _renderCore(){
-  	let selected=false;
-  	if(this.props.filterData.isLock){
+  	let selected=this.props.filterData&&this.props.filterData.selected;
+  	if(this.props.filterData&&this.props.filterData.isLock){
   		return selected? <this._renderLockSelected /> : <this._renderLock />;
   	}else{
   		return selected? <this._renderSelected /> : <View />;
@@ -56,16 +63,17 @@ const EditFilterListItemView = React.createClass({
   },
 
   render() {
+    const d=this.props.filterData||{};
     return (
-      <TouchableOpacity>
-          <View style={styles.filterElem}>
+      <TouchableOpacity onPress={this.props.onPress}>
+          <Animatable.View animation="fadeIn" style={styles.filterElem}>
             <Image style={styles.filterThumb} source={require('../../imgs/page-edit/circle-_moren@2x.png')}>
-              <Image style={styles.filterThumb} source={{uri: this.props.filterData.image}}>
+              <Image style={styles.filterThumb} source={{uri: d.image}}>
               	<this._renderCore />
               </Image>
             </Image>
-            <Text style={styles.filterTitle}>{this.props.filterData.title}</Text>
-          </View>
+            <Text style={styles.filterTitle}>{d.title}</Text>
+          </Animatable.View>
       </TouchableOpacity>);
   },
 });

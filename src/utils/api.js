@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import S from 'string';
 import HttpError from 'standard-http-error';
 import {getConfiguration} from '../utils/configuration';
 import {getAuthenticationToken} from '../utils/authentication';
@@ -81,10 +82,12 @@ export async function request(method, path, body, suppressRedBox) {
  * Takes a relative path and makes it a full URL to API server
  */
 export function url(path) {
-  const apiRoot = getConfiguration('API_ROOT');
-  return path.indexOf('/') === 0
-    ? apiRoot + path
-    : apiRoot + '/' + path;
+  if(S(path).startsWith('http')){
+    return path;
+  }else{
+    const apiRoot = getConfiguration('API_ROOT');
+    return apiRoot+S(path).ensureRight('/').s;
+  }
 }
 
 /**

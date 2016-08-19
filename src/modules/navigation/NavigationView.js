@@ -13,11 +13,6 @@ const {
 import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
-// Height duplicated from React Native NavigationHeader component
-const APP_BAR_HEIGHT = 0;//Platform.OS === 'ios' ? 64 : 56;
-// Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 0;//50;
-
 const NavigationView = React.createClass({
   propTypes: {
     onNavigateBack: PropTypes.func.isRequired,
@@ -30,23 +25,7 @@ const NavigationView = React.createClass({
     switchTab: PropTypes.func.isRequired,
     pushRoute: PropTypes.func.isRequired
   },
-  // NavigationHeader accepts a prop style
-  // NavigationHeader.title accepts a prop textStyle
-  renderHeader(sceneProps) {
-    return (
-      <NavigationHeader
-        {...sceneProps}
-        onNavigateBack={this.props.onNavigateBack}
-        renderTitleComponent={() => {
-          return (
-            <NavigationHeader.Title>
-              {sceneProps.scene.route.title}
-            </NavigationHeader.Title>
-          );
-        }}
-      />
-    );
-  },
+  
   renderScene(sceneProps) {
     // render scene and apply padding to cover
     // for app bar and navigation bar
@@ -56,6 +35,7 @@ const NavigationView = React.createClass({
       </View>
     );
   },
+
   render() {
     const {tabs} = this.props.navigationState;
     const tabKey = tabs.routes[tabs.index].key;
@@ -71,24 +51,6 @@ const NavigationView = React.createClass({
         />
       </View>
     );
-
-    return (
-      <View style={styles.container}>
-        <NavigationCardStack
-          key={'stack_' + tabKey}
-          onNavigateBack={this.props.onNavigateBack}
-          navigationState={scenes}
-          renderOverlay={this.renderHeader}
-          renderScene={this.renderScene}
-        />
-        <TabBar
-          height={TAB_BAR_HEIGHT}
-          tabs={tabs}
-          currentTabIndex={tabs.index}
-          switchTab={this.props.switchTab}
-        />
-      </View>
-    );
   }
 });
 
@@ -98,8 +60,6 @@ const styles = StyleSheet.create({
   },
   sceneContainer: {
     flex: 1,
-    marginTop: APP_BAR_HEIGHT,
-    marginBottom: TAB_BAR_HEIGHT
   }
 });
 

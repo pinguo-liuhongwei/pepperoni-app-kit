@@ -1,4 +1,4 @@
-import {Map} from 'immutable';
+import {Map,List} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import getArtStyle from '../../utils/getArtStyle';
 
@@ -7,22 +7,22 @@ const initialState = Map({
     filters: [],
     filterIsLoaded:false,
     filterIsLoading:true,
-    selectedFilter:null,
+    selectedFilter:{},
 });
 
 // Actions
-const INCREMENT = 'EditState/INCREMENT';
-const FILTER_SELECTED = 'EditState/FILTER_SELECTED';
-const FILTERS_REQUEST = 'EditState/FILTERS_REQUEST';
-const FILTERS_RESPONSE = 'EditState/FILTERS_RESPONSE';
+const INCREMENT = 'EditFilterBarState/INCREMENT';
+const FILTER_SELECTED = 'EditFilterBarState/FILTER_SELECTED';
+const FILTERS_REQUEST = 'EditFilterBarState/FILTERS_REQUEST';
+const FILTERS_RESPONSE = 'EditFilterBarState/FILTERS_RESPONSE';
 
 // Action creators
 export function increment() {
   return {type: INCREMENT};
 }
 
-export function filterSelected(filter) {
-  return {type: FILTER_SELECTED,payload:filter};
+export function filterSelected(index) {
+  return {type: FILTER_SELECTED,payload:index};
 }
 
 export function random() {
@@ -39,13 +39,17 @@ export async function requestFilters() {
 }
 
 // Reducer
-export default function EditStateReducer(state = initialState, action = {}) {
+export default function EditFilterBarStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT:
       return state.update('value', value => value + 1);
 
     case FILTER_SELECTED:
-      return state.set('selectedFilter',action.payload);
+      return state.set('filters', 
+        state.get('filters').update(filters=>  filters.map( (item,index)=>{ 
+          item.selected=index==action.payload; return item; })
+        )
+      );
 
     case FILTERS_REQUEST:
       return loop(
@@ -57,7 +61,7 @@ export default function EditStateReducer(state = initialState, action = {}) {
       return state
         .set('filterIsLoading', false)
         .set('filterIsLoaded', true)
-        .set('filters', action.payload);
+        .set('filters', List(action.payload));
 
     default:
       return state;

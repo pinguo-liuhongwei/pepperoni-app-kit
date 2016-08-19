@@ -4,6 +4,7 @@ import NavigationStateReducer from '../modules/navigation/NavigationState';
 import AuthStateReducer from '../modules/auth/AuthState';
 import HomeStateReducer from '../modules/home/HomeState';
 import EditStateReducer from '../modules/edit/EditState';
+import EditFilterBarState from '../modules/edit/EditFilterBarState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 
 const reducers = {
@@ -13,6 +14,7 @@ const reducers = {
   // Home sample app state. This can be removed in a live application
   home: HomeStateReducer,
   edit: EditStateReducer,
+  editFilterBar: EditFilterBarState,
 
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`

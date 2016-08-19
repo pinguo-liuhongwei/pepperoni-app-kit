@@ -1,4 +1,5 @@
 import pxToDp from '../../utils/pxToDp';
+import * as Animatable from 'react-native-animatable';
 import React, {PropTypes} from 'react';
 import {
   StyleSheet,

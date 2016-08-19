@@ -7,6 +7,7 @@ import {
   Text,
   View
 } from 'react-native';
+import FitImage from 'react-native-fit-image';
 
 const EditCanvasView = React.createClass({
 
@@ -16,11 +17,14 @@ const EditCanvasView = React.createClass({
   },
 
 	render() {
-
-    console.log('Edit Canvas view', this.props.alpha);
+    //{uri:'data:image/jpg;base64,'+this.props.photo.data}
+    //console.log('Edit Canvas view', this.props.alpha);
+    //console.log('Edit Canvas view', this.props.photo);
     //<Image style={[styles.img, {opacity:this.props.alpha}]} source={this.props.photo} />
     return (<View style={styles.main}>
-        <Image style={styles.img} source={{uri:'data:image/jpg;base64,'+this.props.photo.data}} />
+        <FitImage style={[styles.img, {opacity:this.props.alpha}]} 
+          originalWidth={this.props.photo.width} originalHeight={this.props.photo.height}
+          source={{uri:this.props.photo.uri||this.props.photo.get('uri')}} />
     	</View> 
     )}
 
