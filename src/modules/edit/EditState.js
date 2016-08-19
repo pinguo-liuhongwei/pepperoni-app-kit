@@ -4,10 +4,7 @@ import getArtStyle from '../../utils/getArtStyle';
 
 // Initial state
 const initialState = Map({
-    filters: [],
-    filterIsLoaded:false,
-    filterIsLoading:true,
-    selectedFilter:null,
+  
 });
 
 // Actions

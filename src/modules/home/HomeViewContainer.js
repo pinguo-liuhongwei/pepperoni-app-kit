@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import HomeView from './HomeView';
 import {switchTab,RouteIndex} from '../navigation/NavigationState';
+import * as EditCanvasViewState from '../edit/EditCanvasViewState';
 
 
 export default connect(
@@ -13,7 +14,7 @@ export default connect(
       dispatch(switchTab(index));
     },
     photoSelected(photo){
-      dispatch(photo);
+      dispatch(EditCanvasViewState.photoPicked(photo));
     },
 
   })

@@ -1,6 +1,7 @@
 package com.test01;
 
 import com.facebook.react.ReactActivity;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
 
 public class MainActivity extends ReactActivity {
 

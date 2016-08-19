@@ -5,6 +5,7 @@ import AuthStateReducer from '../modules/auth/AuthState';
 import HomeStateReducer from '../modules/home/HomeState';
 import EditStateReducer from '../modules/edit/EditState';
 import EditFilterBarState from '../modules/edit/EditFilterBarState';
+import EditCanvasViewState from '../modules/edit/EditCanvasViewState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 
 const reducers = {
@@ -15,6 +16,7 @@ const reducers = {
   home: HomeStateReducer,
   edit: EditStateReducer,
   editFilterBar: EditFilterBarState,
+  editCanvas: EditCanvasViewState,
 
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`

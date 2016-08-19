@@ -10,12 +10,10 @@ import {
 
 const EditSliderBarView = React.createClass({
   propTypes:{
-    alpha:PropTypes.number.isRequired,
-    alphaChanged:PropTypes.func.isRequired,
   },
   onValueChange(value:number):void{
-    //console.log('EditSliderBarView::onValueChange',value);
     this.props.alphaChanged(value);
+
   },
 	render() {
 

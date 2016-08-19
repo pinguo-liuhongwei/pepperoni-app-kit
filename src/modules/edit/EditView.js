@@ -1,7 +1,7 @@
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import pxToDp from '../../utils/pxToDp';
 import getArtStyle from '../../utils/getArtStyle';
-import EditCanvasView from './EditCanvasView';
+import EditCanvasViewContainer from './EditCanvasViewContainer';
 import EditSliderBarView from './EditSliderBarView';
 import EditHeaderView from './EditHeaderView';
 import EditFilterBarViewContainer from './EditFilterBarViewContainer';
@@ -18,12 +18,11 @@ import {
 
 const EditView = React.createClass({
   propTypes: {
-    switchTab: PropTypes.func.isRequired
+    switchTab: PropTypes.func.isRequired,
+    alphaChanged: PropTypes.func.isRequired,
   },
   getInitialState() {
-    return {
-      alpha: 1,
-    };
+    return {};
   },
   componentWillMount() {
   },
@@ -35,18 +34,12 @@ const EditView = React.createClass({
     this.props.switchTab(0);
   },
 
-  alphaChanged(value) {
-    this.setState({
-      alpha: value
-    });
-  },
-
   render() {
     return (<View style={styles.main}>
-        <EditHeaderView style={styles.header} goBack={this.gotoAlbum} goNext={this.gotoAlbum}></EditHeaderView>
-        <EditCanvasView style={styles.canvas} photo={this.props.photo}  alpha={this.state.alpha} ></EditCanvasView>
+        <EditHeaderView style={styles.header} goBack={this.gotoAlbum} goNext={this.gotoAlbum}/>
+        <EditCanvasViewContainer style={styles.canvas} />
         <EditFilterBarViewContainer style={styles.filterBar} />
-        <EditSliderBarView style={styles.sliderBar} alpha={this.state.alpha} alphaChanged={this.alphaChanged} />
+        <EditSliderBarView alphaChanged={this.props.alphaChanged} style={styles.sliderBar}  />
       </View>)
   }
 });

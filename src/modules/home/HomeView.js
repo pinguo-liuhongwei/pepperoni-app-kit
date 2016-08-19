@@ -33,8 +33,7 @@ const HomeView = React.createClass({
     const options={};
     ImagePicker.launchImageLibrary(options, (response)  => {
       // Same code as in above section!
-      console.log('a photo has been selected',response);
-      this.props.photoSelected(HomeState.photoSelected(response));
+      this.props.photoSelected({...response, data:null});
       this.props.switchTab(1);
     });
   },
