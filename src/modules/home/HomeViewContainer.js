@@ -1,21 +1,28 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import HomeView from './HomeView';
-import {switchTab,RouteIndex} from '../navigation/NavigationState';
 import * as EditCanvasViewState from '../edit/EditCanvasViewState';
+var Platform = require('react-native').Platform;
+var ImagePicker = require('react-native-image-picker');
 
 
 export default connect(
-  state => ({
-     tabs:state.getIn(['navigationState','tabs'])
-    //tabEdit:state.getIn(['navigationState','tabs','routes']),
-  }),
-  dispatch => ({
-    switchTab(index) {
-      dispatch(switchTab(index));
-    },
-    photoSelected(photo){
-      dispatch(EditCanvasViewState.photoPicked(photo));
-    },
+    state => ({
+    }),
+    dispatch => ({
+        gotoCamera() {
+            // Launch Camera:
+            const options = {};
+            ImagePicker.launchCamera(options, (photo) => {
+                return dispatch(EditCanvasViewState.photoPicked({...photo, data: null }));
+            });
+        },
+        gotoAlbum() {
+            // Open Image Library:
+            const options = {};
+            ImagePicker.launchImageLibrary(options, (photo) => {
+                return dispatch(EditCanvasViewState.photoPicked({...photo, data: null }));
+            });
+        },
 
-  })
+    })
 )(HomeView);

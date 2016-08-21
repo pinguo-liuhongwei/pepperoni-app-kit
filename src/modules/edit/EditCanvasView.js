@@ -29,9 +29,8 @@ const EditCanvasView = React.createClass({
   },
 ///
 	render() {
-    //{uri:'data:image/jpg;base64,'+this.props.photo.data}
-    console.log('Edit Canvas view', this.props.alpha);
-    //console.log('Edit Canvas view', this.props.photo);
+    //console.log('Edit Canvas view::alpha', this.props.alpha);
+    //console.log('Edit Canvas view::photo', this.props.photo);
     //<Image style={[styles.img, {opacity:this.props.alpha}]} source={this.props.photo} />
     return (<View style={styles.main}>
         {this.props.imageLocalIsLoading? <ActivityIndicator style={styles.centering}
@@ -41,7 +40,7 @@ const EditCanvasView = React.createClass({
     )}
 
 });
-
+///
 const styles = StyleSheet.create({
   main: {
     backgroundColor:0x808080ff,

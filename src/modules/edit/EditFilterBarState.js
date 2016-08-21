@@ -1,69 +1,61 @@
-import {Map,List} from 'immutable';
-import {loop, Effects} from 'redux-loop';
+import { Map, List } from 'immutable';
 import getArtStyle from '../../utils/getArtStyle';
 
 // Initial state
 const initialState = Map({
     filters: [],
-    filterIsLoaded:false,
-    filterIsLoading:true,
-    selectedFilter:{},
+    filterIsLoaded: false,
+    filterIsLoading: true,
+    selectedFilter: {},
 });
 
 // Actions
 const INCREMENT = 'EditFilterBarState/INCREMENT';
 const FILTER_SELECTED = 'EditFilterBarState/FILTER_SELECTED';
-const FILTERS_REQUEST = 'EditFilterBarState/FILTERS_REQUEST';
-const FILTERS_RESPONSE = 'EditFilterBarState/FILTERS_RESPONSE';
+const REQUEST_FILTERS = 'EditFilterBarState/REQUEST_FILTERS';
+const REQUEST_FILTERS_PENDING = 'EditFilterBarState/REQUEST_FILTERS_PENDING';
+const REQUEST_FILTERS_FULFILLED = 'EditFilterBarState/REQUEST_FILTERS_FULFILLED';
+const REQUEST_FILTERS_REJECTED = 'EditFilterBarState/REQUEST_FILTERS_REJECTED';
 
 // Action creators
-export function increment() {
-  return {type: INCREMENT};
-}
-
 export function filterSelected(index) {
-  return {type: FILTER_SELECTED,payload:index};
+    return { type: FILTER_SELECTED, payload: index };
 }
 
-export function random() {
-  return {
-    type: FILTERS_REQUEST
-  };
-}
 
-export async function requestFilters() {
-  return {
-    type: FILTERS_RESPONSE,
-    payload: await getArtStyle()
-  };
+export function requestFilters() {
+    return (dispatch, getState) => dispatch({
+        type: REQUEST_FILTERS,
+        payload: getArtStyle()
+    });
 }
 
 // Reducer
 export default function EditFilterBarStateReducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case INCREMENT:
-      return state.update('value', value => value + 1);
+    switch (action.type) {
 
-    case FILTER_SELECTED:
-      return state.set('filters', 
-        state.get('filters').update(filters=>  filters.map( (item,index)=>{ 
-          item.selected=index==action.payload; return item; })
-        )
-      );
+        case FILTER_SELECTED:
+            return state.set('filters',
+                state.get('filters').update(filters => filters.map((item, index) => {
+                    item.selected = index == action.payload;
+                    return item;
+                }))
+            );
 
-    case FILTERS_REQUEST:
-      return loop(
-        state.set('filterIsLoading', true),
-        Effects.promise(requestFilters)
-      );
+        case REQUEST_FILTERS_PENDING:
+            return state.set('filterIsLoading', true)
+                .set('filterIsLoaded', false);
 
-    case FILTERS_RESPONSE:
-      return state
-        .set('filterIsLoading', false)
-        .set('filterIsLoaded', true)
-        .set('filters', List(action.payload));
+        case REQUEST_FILTERS_FULFILLED:
+            return state.set('filterIsLoading', false)
+                .set('filterIsLoaded', true)
+                .set('filters', List(action.payload));
 
-    default:
-      return state;
-  }
+        case REQUEST_FILTERS_REJECTED:
+            return state.set('filterIsLoading', false)
+                .set('filterIsLoaded', false);
+
+        default:
+            return state;
+    }
 }

@@ -8,34 +8,21 @@ import {
   Text,
   View
 } from 'react-native';
-var Platform = require('react-native').Platform;
-var ImagePicker = require('react-native-image-picker');
 
 
 const HomeView = React.createClass({
   propTypes: {
-    switchTab: PropTypes.func.isRequired,
-    //tabEdit:PropTypes.String.isRequired,
+    gotoAlbum: PropTypes.func.isRequired,
+    gotoCamera: PropTypes.func.isRequired,
   },
   gotoCamera() {
-    console.log('gotoCamera');
-    //this.props.switchTab(this.states.tabs);
-    // Launch Camera:
-    const options={};
-    ImagePicker.launchCamera(options, (response)  => {
-      // Same code as in above section!
-    });
+    console.log('HomeView::gotoCamera');
+    this.props.gotoCamera();
   },
 
   gotoAlbum() {
-    console.log('gotoAlbum',this.props.tabEdit);
-    // Open Image Library:
-    const options={};
-    ImagePicker.launchImageLibrary(options, (response)  => {
-      // Same code as in above section!
-      this.props.photoSelected({...response, data:null});
-      this.props.switchTab(1);
-    });
+    console.log('HomeView::gotoAlbum');
+    this.props.gotoAlbum();
   },
 
   render() {

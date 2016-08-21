@@ -1,28 +1,28 @@
-import {Map} from 'immutable';
-import {combineReducers} from 'redux-loop';
+import { Map } from 'immutable';
+import { combineReducers } from 'redux-loop';
 import NavigationStateReducer from '../modules/navigation/NavigationState';
 import AuthStateReducer from '../modules/auth/AuthState';
 import HomeStateReducer from '../modules/home/HomeState';
 import EditStateReducer from '../modules/edit/EditState';
-import EditFilterBarState from '../modules/edit/EditFilterBarState';
-import EditCanvasViewState from '../modules/edit/EditCanvasViewState';
-import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
+import EditFilterBarStateReducer from '../modules/edit/EditFilterBarState';
+import EditCanvasViewStateReducer from '../modules/edit/EditCanvasViewState';
+import SessionStateReducer, { RESET_STATE } from '../modules/session/SessionState';
 
 const reducers = {
-  // Authentication/login state
-  auth: AuthStateReducer,
+    // Authentication/login state
+    auth: AuthStateReducer,
 
-  // Home sample app state. This can be removed in a live application
-  home: HomeStateReducer,
-  edit: EditStateReducer,
-  editFilterBar: EditFilterBarState,
-  editCanvas: EditCanvasViewState,
+    // Home sample app state. This can be removed in a live application
+    home: HomeStateReducer,
+    edit: EditStateReducer,
+    editFilterBar: EditFilterBarStateReducer,
+    editCanvas: EditCanvasViewStateReducer,
 
-  // @NOTE: By convention, the navigation state must live in a subtree called
-  //`navigationState`
-  navigationState: NavigationStateReducer,
+    // @NOTE: By convention, the navigation state must live in a subtree called
+    //`navigationState`
+    navigationState: NavigationStateReducer,
 
-  session: SessionStateReducer
+    session: SessionStateReducer
 
 };
 
@@ -33,16 +33,16 @@ const getImmutable = (child, key) => child ? child.get(key) : void 0;
 const setImmutable = (child, key, value) => child.set(key, value);
 
 const namespacedReducer = combineReducers(
-  reducers,
-  immutableStateContainer,
-  getImmutable,
-  setImmutable
+    reducers,
+    immutableStateContainer,
+    getImmutable,
+    setImmutable
 );
 
 export default function mainReducer(state, action) {
-  if (action.type === RESET_STATE) {
-    return namespacedReducer(action.payload, action);
-  }
+    if (action.type === RESET_STATE) {
+        return namespacedReducer(action.payload, action);
+    }
 
-  return namespacedReducer(state || void 0, action);
+    return namespacedReducer(state || void 0, action);
 }

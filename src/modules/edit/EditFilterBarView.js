@@ -27,12 +27,12 @@ const EditFilterBarView = React.createClass({
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {dataSource:ds.cloneWithRows([])};
   },
-  componentWillMount(){
+  componentDidMount(){
     this.reloadFilters();
   },
 
   reloadFilters(){
-    this.props.dispatch(EditFilterBarState.requestFilters());
+    this.props.dispatch(EditFilterBarState.requestFilters()).catch(e=>console.log(e));
   },
   _pressRow(rowData: object,rowID: number) {
     console.log("EditFilterBarView::_pressRow",rowID,rowData);
