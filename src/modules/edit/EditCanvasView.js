@@ -23,17 +23,18 @@ const EditCanvasView = React.createClass({
   },
 
   _renderImage(){
+    const photo=this.props.photo;
     return (<Animatable.Image animation="fadeIn" style={[styles.img, {opacity:this.props.alpha}]} 
-          originalWidth={this.props.photo.width} originalHeight={this.props.photo.height}
-          source={{uri:this.props.photo.uri||this.props.photo.get('uri')}} />);
+          originalWidth={photo.width} originalHeight={photo.height}
+          source={{uri:photo.uri||photo.get('uri')}} />);
   },
 ///
 	render() {
     //console.log('Edit Canvas view::alpha', this.props.alpha);
-    //console.log('Edit Canvas view::photo', this.props.photo);
+    console.log('Edit Canvas view::photo', this.props.photo);
     //<Image style={[styles.img, {opacity:this.props.alpha}]} source={this.props.photo} />
     return (<View style={styles.main}>
-        {this.props.imageLocalIsLoading? <ActivityIndicator style={styles.centering}
+        {this.props.imageLocalIsLoading||!this.props.photo? <ActivityIndicator style={styles.centering}
           color="white"
           size="large" /> : <this._renderImage/>}
     	</View> 

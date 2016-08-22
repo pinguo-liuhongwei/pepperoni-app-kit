@@ -9,7 +9,7 @@ import * as NavigationState from '../navigation/NavigationState';
 // Initial state
 const initialState = Map({
     alpha: 1,
-    photo: {},
+    photo: null,
     effectedPhoto: {},
     imageLocalIsLoading: true,
     imageUploading: false,
@@ -33,7 +33,7 @@ export function alphaChanged(alpha) {
 }
 
 function uploadImage(data) {
-    const photo = data.value.uri;
+    const photo = data.value && data.value.uri ? data.value.uri : '';
     console.log('EditCanvasViewState::uploadImage', photo);
     return Promise.resolve(photo);
 }
@@ -41,7 +41,7 @@ function uploadImage(data) {
 export function photoPicked(photo) {
     return dispatch => dispatch({ type: RESIZE_IMAGE, payload: imageResize(photo) })
         .then((result) => {
-            dispatch({ type: UPLOAD_IMAGE, payload: uploadImage(result) });
+            //dispatch({ type: UPLOAD_IMAGE, payload: uploadImage(result) });
             dispatch(NavigationState.showEditView())
         });
 }
@@ -54,10 +54,6 @@ export async function imageResize(pickedPhoto) {
             const result = {...pickedPhoto, uri: resizedImageUri };
             console.log('EditCanvasViewState::imageResize', result);
             return pickedPhoto;
-        })
-        .catch((err) => {
-            console.error('EditCanvasViewState::imageResize', pickedPhoto, err);
-            return null;
         });
 }
 
@@ -68,15 +64,19 @@ export default function EditCanvasViewStateReducer(state = initialState, action 
             return state.set('alpha', action.payload);
 
         case RESIZE_IMAGE_PENDING:
-            return state.set('imageLocalIsLoading', true).set('photo', {});
+            return state
+                .set('imageLocalIsLoading', true)
+                .set('photo', null);
         case RESIZE_IMAGE_FULFILLED:
 
             return state
                 .set('imageLocalIsLoading', false)
                 .set('photo', action.payload);
         case RESIZE_IMAGE_REJECTED:
+            console.error(RESIZE_IMAGE_REJECTED,action.payload.message);
             return state
-                .set('imageLocalIsLoading', false);
+                .set('imageLocalIsLoading', false)
+                .set('photo', null);
 
         default:
             return state;

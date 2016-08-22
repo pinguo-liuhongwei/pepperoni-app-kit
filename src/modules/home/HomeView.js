@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     //alignSelf: 'stretch',
     width: null,
     height:null,
-    resizeMode:'stretch'
+    //resizeMode:'stretch'
   },
   adCompenent:{
     flex:0,

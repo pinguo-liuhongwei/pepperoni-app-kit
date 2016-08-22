@@ -65,7 +65,7 @@ const EditFilterListItemView = React.createClass({
   render() {
     const d=this.props.filterData||{};
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableOpacity onPress={this.props.onPress} style={styles.canvas}>
           <Animatable.View animation="fadeIn" style={styles.filterElem}>
             <Image style={styles.filterThumb} source={require('../../imgs/page-edit/circle-_moren@2x.png')}>
               <Image style={styles.filterThumb} source={{uri: d.image}}>
@@ -80,16 +80,24 @@ const EditFilterListItemView = React.createClass({
 
 
 const styles = StyleSheet.create({
-
+  canvas:{
+    flex:0,
+    height:pxToDp(260),
+    width:pxToDp(23*2+164),
+  },
 
   filterElem:{
-    backgroundColor:0xffff0000,
+    flex:0,
+    backgroundColor:0xffff0010,
     flexDirection:'column',
     height:pxToDp(260),
     width:pxToDp(23*2+164),
     alignItems:'center',
     justifyContent:'space-between',
     paddingBottom:pxToDp(30),
+    borderRadius:pxToDp(164/2),
+    overflow:'hidden',
+    borderColor:0x000000ff,
   },
   filterThumbBg:{
     height:pxToDp(164),
@@ -105,12 +113,13 @@ const styles = StyleSheet.create({
   filterThumb:{
     height:pxToDp(164),
     width:pxToDp(164),
-    resizeMode:'cover',
+//    resizeMode:'cover',
     flexDirection:'column',
     alignItems:'stretch',
     borderRadius:pxToDp(164/2),
     alignItems:'center',
     justifyContent:'center',
+    overflow:'hidden',
 
   },
   filterTitle:{
