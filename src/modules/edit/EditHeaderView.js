@@ -23,9 +23,6 @@ const EditHeaderView = React.createClass({
   	console.log('EditHeaderView', 'goNext');
     this.props.goNext();
   },
-  gotoResult() {
-    this.props.switchTab(this.props.tabs.getIn('routes',1));
-  },
 
   render() {
 

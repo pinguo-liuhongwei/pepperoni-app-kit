@@ -1,8 +1,9 @@
 //ApiArtStyle.js
 import * as api from './api';
+import _ from 'lodash';
 import getArtAuth from './getArtAuth';
 
-let artAuth = {}; //{req_host:'http://115.231.182.11/'};
+let artAuth = {};//{req_host:'http://115.231.182.11/'};
 let filters = [];
 
 const API_PATH = '/api/art/style';
@@ -32,7 +33,7 @@ async function requestArtStyle(host) {
     return api.post(host + API_PATH, PAYLOAD).then(function(data) {
         console.log('/api/art/style', data);
         if (data.status == 200) {
-            return (filters = data.data);
+            return _.isArray(data.data)?(filters = data.data):(filters = data.data.list);
         } else {
             throw new Error("Oops! " + data.message);
         }
@@ -51,7 +52,6 @@ export default async function getArtStyle() {
         return requestArtStyle(artAuth.req_host);
     }
 
-    //return requestArtStyle(artAuth.req_host);
     console.log('getArtStyle::', 'getting Auth before fetching filters');
     return getArtAuth().then(auth => {
         artAuth = auth;

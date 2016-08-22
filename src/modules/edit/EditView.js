@@ -18,7 +18,7 @@ import {
 
 const EditView = React.createClass({
   propTypes: {
-    switchTab: PropTypes.func.isRequired,
+    goHome: PropTypes.func.isRequired,
     alphaChanged: PropTypes.func.isRequired,
   },
   getInitialState() {
@@ -26,17 +26,16 @@ const EditView = React.createClass({
   },
   componentWillMount() {
   },
-  gotoCamera() {
-    console.log('EditView', 'gotoCamera');
+  goHome() {
+    this.props.goHome();
   },
-  gotoAlbum() {
-    console.log('EditView', 'gotoAlbum', this.props.tabs.getIn('routes', 0));
-    this.props.switchTab(0);
+  saveResult() {
+    console.log('EditView', 'saveResult');
   },
 
   render() {
     return (<View style={styles.main}>
-        <EditHeaderView style={styles.header} goBack={this.gotoAlbum} goNext={this.gotoAlbum}/>
+        <EditHeaderView style={styles.header} goBack={this.goHome} goNext={this.saveResult}/>
         <EditCanvasViewContainer style={styles.canvas} />
         <EditFilterBarViewContainer style={styles.filterBar} />
         <EditSliderBarView alphaChanged={this.props.alphaChanged} style={styles.sliderBar}  />

@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
 import S from 'string';
+import {encode} from 'querystring';
 import HttpError from 'standard-http-error';
 import { getConfiguration } from '../utils/configuration';
 import { getAuthenticationToken } from '../utils/authentication';
@@ -98,7 +99,7 @@ async function sendRequest(method, path, body) {
         const endpoint = url(path);
         const token = await getAuthenticationToken();
         const headers = getRequestHeaders(body, token);
-        const options = body ? { method, headers, body: JSON.stringify(body) } : { method, headers };
+        const options = body ? { method, headers, body: encode(body) } : { method, headers };
 
         return timeout(fetch(endpoint, options), TIMEOUT);
     } catch (e) {
@@ -139,7 +140,7 @@ async function handleResponse(path, response) {
 }
 
 function getRequestHeaders(body, token) {
-    const headers = body ? { 'Accept': 'application/json', 'Content-Type': 'application/json; charset=UTF-8' } : { 'Accept': 'application/json' };
+    const headers = body ? { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } : { 'Accept': 'application/json' };
 
     if (token) {
         return {...headers, Authorization: token };

@@ -10,26 +10,18 @@ const POP_ROUTE = 'NavigationState/POP_ROUTE';
 const SWITCH_TAB = 'NavigationState/SWITCH_TAB';
 
 
-export function showEditView(){
-    return {
-        type: SWITCH_TAB,
-        payload: 0
-    };
+export function showEditView() {
+    return pushRoute({ key: 'Edit', title: 'Edit' });
+    return { type: SWITCH_TAB, payload: 0 };
 }
 
 export function switchTab(index) {
-    return {
-        type: SWITCH_TAB,
-        payload: index
-    };
+    return { type: SWITCH_TAB, payload: index };
 }
 
 // Action creators
 export function pushRoute(route) {
-    return {
-        type: PUSH_ROUTE,
-        payload: route
-    };
+    return { type: PUSH_ROUTE, payload: route };
 }
 
 export function popRoute() {
@@ -37,10 +29,7 @@ export function popRoute() {
 }
 
 export function RouteIndex() {
-    return {
-        HomeTab: 0,
-        EditTab: 1,
-    }
+    return { HomeTab: 0, EditTab: 1, }
 }
 
 // reducers for tabs and scenes are separate

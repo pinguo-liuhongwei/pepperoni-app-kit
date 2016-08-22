@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EditView from './EditView';
-import { switchTab, RouteIndex } from '../navigation/NavigationState';
+import * as NavigationState from '../navigation/NavigationState';
 import * as EditCanvasViewState from './EditCanvasViewState';
 
 export default connect(
@@ -8,8 +8,8 @@ export default connect(
         tabs: state.getIn(['navigationState', 'tabs'])
     }),
     dispatch => ({
-        switchTab(index) {
-            dispatch(switchTab(index));
+        goHome() {
+            dispatch(NavigationState.popRoute());
         },
         alphaChanged(alpha) {
             dispatch(EditCanvasViewState.alphaChanged(alpha));

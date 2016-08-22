@@ -47,6 +47,7 @@ export default function EditFilterBarStateReducer(state = initialState, action =
                 .set('filterIsLoaded', false);
 
         case REQUEST_FILTERS_FULFILLED:
+        console.dir(action.payload);
             return state.set('filterIsLoading', false)
                 .set('filterIsLoaded', true)
                 .set('filters', List(action.payload));

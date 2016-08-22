@@ -12,6 +12,7 @@ const initialState = Map({
     photo: {},
     effectedPhoto: {},
     imageLocalIsLoading: true,
+    imageUploading: false,
 });
 
 // Actions
@@ -21,15 +22,28 @@ const RESIZE_IMAGE_PENDING = 'EditCanvasViewState/RESIZE_IMAGE_PENDING';
 const RESIZE_IMAGE_FULFILLED = 'EditCanvasViewState/RESIZE_IMAGE_FULFILLED';
 const RESIZE_IMAGE_REJECTED = 'EditCanvasViewState/RESIZE_IMAGE_REJECTED';
 
+const UPLOAD_IMAGE = 'EditCanvasViewState/UPLOAD_IMAGE';
+const UPLOAD_IMAGE_PENDING = 'EditCanvasViewState/UPLOAD_IMAGE_PENDING';
+const UPLOAD_IMAGE_FULFILLED = 'EditCanvasViewState/UPLOAD_IMAGE_FULFILLED';
+const UPLOAD_IMAGE_REJECTED = 'EditCanvasViewState/UPLOAD_IMAGE_REJECTED';
+
 // Action creators
 export function alphaChanged(alpha) {
     return { type: ALPHA_CHANGED, payload: alpha };
 }
 
+function uploadImage(data) {
+    const photo = data.value.uri;
+    console.log('EditCanvasViewState::uploadImage', photo);
+    return Promise.resolve(photo);
+}
 
 export function photoPicked(photo) {
     return dispatch => dispatch({ type: RESIZE_IMAGE, payload: imageResize(photo) })
-        .then(()=>dispatch(NavigationState.showEditView()));
+        .then((result) => {
+            dispatch({ type: UPLOAD_IMAGE, payload: uploadImage(result) });
+            dispatch(NavigationState.showEditView())
+        });
 }
 
 //pickedPhoto={fileSize,width,height,isVertical,origURL,uri}
@@ -37,8 +51,8 @@ export function photoPicked(photo) {
 export async function imageResize(pickedPhoto) {
     return ImageResizer.createResizedImage(pickedPhoto.uri, 1400, 1400, 'JPEG', 85)
         .then(function(resizedImageUri) {
-            //const result={...pickedPhoto,uri:resizedImageUri};
-            //console.log('EditCanvasViewState::imageResize',result);
+            const result = {...pickedPhoto, uri: resizedImageUri };
+            console.log('EditCanvasViewState::imageResize', result);
             return pickedPhoto;
         })
         .catch((err) => {
@@ -56,7 +70,7 @@ export default function EditCanvasViewStateReducer(state = initialState, action 
         case RESIZE_IMAGE_PENDING:
             return state.set('imageLocalIsLoading', true).set('photo', {});
         case RESIZE_IMAGE_FULFILLED:
-            
+
             return state
                 .set('imageLocalIsLoading', false)
                 .set('photo', action.payload);

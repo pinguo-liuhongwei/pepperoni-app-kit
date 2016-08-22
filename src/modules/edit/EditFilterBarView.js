@@ -32,7 +32,7 @@ const EditFilterBarView = React.createClass({
   },
 
   reloadFilters(){
-    this.props.dispatch(EditFilterBarState.requestFilters()).catch(e=>console.log(e));
+    this.props.dispatch(EditFilterBarState.requestFilters());//.catch(e=>console.log(e));
   },
   _pressRow(rowData: object,rowID: number) {
     console.log("EditFilterBarView::_pressRow",rowID,rowData);
